@@ -219,7 +219,7 @@ RGY_ERR RGYParallelEncProcess::getNextPacket(RGYOutputRawPEExtHeader **ptr) {
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
-    if ((*ptr == nullptr)) {
+    if (*ptr == nullptr) {
         return RGY_ERR_MORE_BITSTREAM;
     }
     return RGY_ERR_NONE;

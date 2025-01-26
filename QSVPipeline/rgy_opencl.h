@@ -660,7 +660,7 @@ protected:
     virtual RGYFrameInfo getInfo() const override { return frameInfo(); };
 public:
     virtual const RGYFrameInfo& frameInfo() const { return frame; }
-    virtual bool isempty() const { return frame.ptr[0] == nullptr; }
+    virtual bool isempty() const override { return frame.ptr[0] == nullptr; }
     virtual void setTimestamp(uint64_t timestamp) override { frame.timestamp = timestamp; }
     virtual void setDuration(uint64_t duration) override { frame.duration = duration; }
     virtual void setPicstruct(RGY_PICSTRUCT picstruct) override { frame.picstruct = picstruct; }
@@ -696,7 +696,7 @@ public:
     const RGYFrameInfo& host() const { return frame; }
     std::vector<RGYOpenCLEvent>& mapEvents() { return m_eventMap; }
 public:
-    virtual bool isempty() const { return frame.ptr[0] == nullptr; }
+    virtual bool isempty() const override { return frame.ptr[0] == nullptr; }
     virtual void setTimestamp(uint64_t timestamp) override;
     virtual void setDuration(uint64_t duration) override;
     virtual void setPicstruct(RGY_PICSTRUCT picstruct) override;

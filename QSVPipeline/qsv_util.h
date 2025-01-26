@@ -511,7 +511,7 @@ public:
     RGYFrameMFXSurf(mfxFrameSurface1& s) : m_surface(s), m_duration(0), m_inputFrameId(-1), m_dataList() { };
     virtual mfxFrameSurface1 *surf() { return &m_surface; };
     virtual const mfxFrameSurface1 *surf() const { return &m_surface; };
-    virtual bool isempty() const { return false; };
+    virtual bool isempty() const override { return false; };
     virtual sInputCrop crop() const {
         sInputCrop cr;
         cr.e.left = m_surface.Info.CropX;

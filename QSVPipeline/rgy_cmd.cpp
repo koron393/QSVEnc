@@ -7581,11 +7581,11 @@ tstring gen_cmd(const RGYParamVpp *param, const RGYParamVpp *defaultPrm, bool sa
                 ColorspaceConv convDefault;
                 if (param->colorspace.convs[i].approx_gamma != convDefault.approx_gamma) {
                     tmp << _T(",approx_gamma=");
-                    tmp << param->colorspace.convs[i].approx_gamma ? _T("true") : _T("false");
+                    (tmp << param->colorspace.convs[i].approx_gamma) ? _T("true") : _T("false");
                 }
                 if (param->colorspace.convs[i].scene_ref != convDefault.scene_ref) {
                     tmp << _T(",scene_ref=");
-                    tmp << param->colorspace.convs[i].scene_ref ? _T("true") : _T("false");
+                    (tmp << param->colorspace.convs[i].scene_ref) ? _T("true") : _T("false");
                 }
             }
             ADD_PATH(_T("lut3d"), colorspace.lut3d.table_file.c_str());

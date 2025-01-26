@@ -140,7 +140,7 @@ public:
     virtual RGY_ERR allocate(DeviceVulkan *vk, const int width, const int height, const RGY_CSP csp, const int bitdepth);
     virtual void deallocate();
     const RGYFrameInfo& frameInfo() { return frame; }
-    virtual bool isempty() const { return !frame.ptr[0]; }
+    virtual bool isempty() const override { return !frame.ptr[0]; }
     virtual void setTimestamp(uint64_t timestamp) override { frame.timestamp = timestamp; }
     virtual void setDuration(uint64_t duration) override { frame.duration = duration; }
     virtual void setPicstruct(RGY_PICSTRUCT picstruct) override { frame.picstruct = picstruct; }

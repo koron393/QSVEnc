@@ -228,7 +228,7 @@ public:
         clear();
         m_surfaces.resize(surfs.size());
         for (size_t i = 0; i < m_surfaces.size(); i++) {
-            m_surfaces[i] = std::make_unique<PipelineTaskSurfacesPair>(std::move(std::make_unique<RGYFrameMFXSurf>(surfs[i])));
+            m_surfaces[i] = std::make_unique<PipelineTaskSurfacesPair>(std::make_unique<RGYFrameMFXSurf>(surfs[i]));
         }
     }
     void setSurfaces(std::vector<std::unique_ptr<RGYCLFrame>>& surfs) {

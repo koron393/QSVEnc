@@ -140,7 +140,7 @@ public:
     RGYFrameDataDOVIRpu();
     RGYFrameDataDOVIRpu(const uint8_t* data, size_t size, int64_t timestamp);
     virtual ~RGYFrameDataDOVIRpu();
-    virtual RGY_ERR convert(const RGYFrameDataMetadataConvertParam *prm, RGYLog *log);
+    virtual RGY_ERR convert(const RGYFrameDataMetadataConvertParam *prm, RGYLog *log) override;
     virtual std::vector<uint8_t> gen_nal() const override;
     virtual std::vector<uint8_t> gen_obu() const override;
 };
@@ -245,7 +245,7 @@ public:
     virtual RGY_ERR allocate(const RGYFrameInfo &frame);
     virtual void deallocate();
     const RGYFrameInfo& frameInfo() { return frame; }
-    virtual bool isempty() const { return !frame.ptr[0]; }
+    virtual bool isempty() const override { return !frame.ptr[0]; }
     virtual void setTimestamp(uint64_t timestamp) override { frame.timestamp = timestamp; }
     virtual void setDuration(uint64_t duration) override { frame.duration = duration; }
     virtual void setPicstruct(RGY_PICSTRUCT picstruct) override { frame.picstruct = picstruct; }
@@ -269,7 +269,7 @@ public:
     RGYFrameRef(RGYFrameInfo& frame_);
     virtual ~RGYFrameRef();
     const RGYFrameInfo& frameInfo() { return frame; }
-    virtual bool isempty() const { return !frame.ptr[0]; }
+    virtual bool isempty() const override { return !frame.ptr[0]; }
     virtual void setTimestamp(uint64_t timestamp) override { frame.timestamp = timestamp; }
     virtual void setDuration(uint64_t duration) override { frame.duration = duration; }
     virtual void setPicstruct(RGY_PICSTRUCT picstruct) override { frame.picstruct = picstruct; }

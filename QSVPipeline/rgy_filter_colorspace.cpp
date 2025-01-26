@@ -584,7 +584,7 @@ public:
     virtual ~ColorspaceOpLUT3D() {};
     virtual std::string print() override;
     virtual std::string printInfo() override;
-    virtual bool add(const ColorspaceOp *op) { UNREFERENCED_PARAMETER(op); return false; }
+    virtual bool add(const ColorspaceOp *op) override { UNREFERENCED_PARAMETER(op); return false; }
     virtual RGY_ERR init(std::vector<uint8_t>& devParams);
 protected:
     void setAdditionalParams(std::vector<uint8_t>& additionalParams, const std::vector<LUTVEC>& luttable);
