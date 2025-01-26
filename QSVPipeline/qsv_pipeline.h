@@ -43,9 +43,9 @@
 
 #ifndef BUILD_AUO
 #ifdef NDEBUG
-#pragma comment(lib, "vpl.lib")
+#pragma comment(lib, "vpl")
 #else
-#pragma comment(lib, "vpld.lib")
+#pragma comment(lib, "vpld")
 #endif
 #endif
 

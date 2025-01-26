@@ -37,7 +37,7 @@
 
 #if ENABLE_AVSW_READER && ENABLE_LIBASS_SUBBURN
 
-#pragma comment(lib, "libass-9.lib")
+#pragma comment(lib, "ass")
 
 static bool check_libass_dll() {
 #if defined(_WIN32) || defined(_WIN64)

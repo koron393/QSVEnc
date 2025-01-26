@@ -67,13 +67,13 @@ extern "C" {
 #include <libavdevice/avdevice.h>
 #endif
 }
-#pragma comment (lib, "avcodec.lib")
-#pragma comment (lib, "avformat.lib")
-#pragma comment (lib, "avutil.lib")
-#pragma comment (lib, "swresample.lib")
-#pragma comment (lib, "avfilter.lib")
+#pragma comment (lib, "avcodec")
+#pragma comment (lib, "avformat")
+#pragma comment (lib, "avutil")
+#pragma comment (lib, "swresample")
+#pragma comment (lib, "avfilter")
 #if ENABLE_LIBAVDEVICE
-#pragma comment (lib, "avdevice.lib")
+#pragma comment (lib, "avdevice")
 #endif
 #pragma warning (pop)
 
