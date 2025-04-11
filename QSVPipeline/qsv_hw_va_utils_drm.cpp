@@ -34,8 +34,10 @@ or https://software.intel.com/en-us/media-client-solutions-support.
 constexpr mfxU32 MFX_DRI_MAX_NODES_NUM = 16;
 constexpr mfxU32 MFX_DRI_RENDER_START_INDEX = 128;
 constexpr mfxU32 MFX_DRI_CARD_START_INDEX = 0;
-constexpr  mfxU32 MFX_DRM_DRIVER_NAME_LEN = 4;
-const char* MFX_DRM_INTEL_DRIVER_NAME = "i915";
+constexpr mfxU32 MFX_DRM_I915_DRIVER_NAME_LEN = 4;
+constexpr mfxU32 MFX_DRM_XE_DRIVER_NAME_LEN = 2;
+const char* MFX_DRM_I915_DRIVER_NAME = "i915";
+const char* MFX_DRM_XE_DRIVER_NAME = "xe";
 const char* MFX_DRI_PATH = "/dev/dri/";
 const char* MFX_DRI_NODE_RENDER = "renderD";
 const char* MFX_DRI_NODE_CARD = "card";
@@ -51,7 +53,7 @@ int get_drm_driver_name(int fd, char *name, int name_size)
 int open_target_intel_adapter(const int type, const int targetIntelAdaptorNum, RGYLog *log)
 {
     std::string adapterPath = MFX_DRI_PATH;
-    char driverName[MFX_DRM_DRIVER_NAME_LEN + 1] = {};
+    char driverName[MFX_DRM_I915_DRIVER_NAME_LEN + 1] = {};
     mfxU32 nodeIndex;
 
     switch (type) {
@@ -80,9 +82,11 @@ int open_target_intel_adapter(const int type, const int targetIntelAdaptorNum, R
                 log->write(RGY_LOG_ERROR, RGY_LOGT_DEV, _T("Adaptor #%d [%s]: Exists, but failed to open.\n"), targetIntelAdaptorNum, char_to_tstring(curAdapterPath).c_str());
             }
         } else {
-            if (!get_drm_driver_name(fd, driverName, MFX_DRM_DRIVER_NAME_LEN)) {
+            if ((!get_drm_driver_name(fd, driverName, MFX_DRM_I915_DRIVER_NAME_LEN)) ||
+                (!get_drm_driver_name(fd, driverName, MFX_DRM_XE_DRIVER_NAME_LEN))) {
                 log->write(RGY_LOG_DEBUG, RGY_LOGT_DEV, _T("Adaptor #%d [%s]: driver name %s\n"), targetIntelAdaptorNum, char_to_tstring(curAdapterPath).c_str(), char_to_tstring(driverName).c_str());
-                if (!strcmp(driverName, MFX_DRM_INTEL_DRIVER_NAME)) {
+                if ((!strcmp(driverName, MFX_DRM_I915_DRIVER_NAME)) ||
+                    (!strcmp(driverName, MFX_DRM_XE_DRIVER_NAME))) {
                     log->write(RGY_LOG_DEBUG, RGY_LOGT_DEV, _T("Adaptor #%d [%s]: #%d Intel adaptor found\n"), targetIntelAdaptorNum, char_to_tstring(curAdapterPath).c_str(), targetIntelAdaptorNum);
                     return fd;
                 }
@@ -107,9 +111,11 @@ int open_target_intel_adapter(const int type, const int targetIntelAdaptorNum, R
             continue;
         }
 
-        if (!get_drm_driver_name(fd, driverName, MFX_DRM_DRIVER_NAME_LEN)) {
+        if ((!get_drm_driver_name(fd, driverName, MFX_DRM_I915_DRIVER_NAME_LEN)) ||
+            (!get_drm_driver_name(fd, driverName, MFX_DRM_XE_DRIVER_NAME_LEN))) {
             log->write(RGY_LOG_DEBUG, RGY_LOGT_DEV, _T("Adaptor #%d [%s]: driver name %s\n"), i, char_to_tstring(curAdapterPath).c_str(), char_to_tstring(driverName).c_str());
-            if (!strcmp(driverName, MFX_DRM_INTEL_DRIVER_NAME)) {
+            if ((!strcmp(driverName, MFX_DRM_I915_DRIVER_NAME)) ||
+                (!strcmp(driverName, MFX_DRM_XE_DRIVER_NAME))) {
                 log->write(logLevelFound, RGY_LOGT_DEV, _T("Adaptor #%d [%s]: #%d Intel adaptor\n"), i, char_to_tstring(curAdapterPath).c_str(), intelAdaptorCount);
                 if (intelAdaptorCount == targetIntelAdaptorNum) {
                     return fd;
@@ -137,9 +143,12 @@ int open_intel_adapter(const std::string& devicePath, const int type, const int 
         return -1;
     }
 
-    char driverName[MFX_DRM_DRIVER_NAME_LEN + 1] = {};
-    if (!get_drm_driver_name(fd, driverName, MFX_DRM_DRIVER_NAME_LEN) &&
-        !strcmp(driverName, MFX_DRM_INTEL_DRIVER_NAME)) {
+    char driverName[MFX_DRM_I915_DRIVER_NAME_LEN + 1] = {};
+    if (!get_drm_driver_name(fd, driverName, MFX_DRM_I915_DRIVER_NAME_LEN) &&
+        !strcmp(driverName, MFX_DRM_I915_DRIVER_NAME)) {
+            return fd;
+    } else if (!get_drm_driver_name(fd, driverName, MFX_DRM_XE_DRIVER_NAME_LEN) &&
+        !strcmp(driverName, MFX_DRM_XE_DRIVER_NAME)) {
             return fd;
     } else {
         close(fd);
