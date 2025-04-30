@@ -66,7 +66,7 @@ RGYDeviceUsageLockManager::RGYDeviceUsageLockManager(RGYDeviceUsageHeader *heade
         std::this_thread::yield();
     }
 #else
-    while (__sync_val_compare_and_swap(&m_header->lock, expected, desired) != expected) {
+    while (__atomic_exchange_n(&m_header->lock, expected, desired) != expected) {
         if (force) {
             if (std::chrono::system_clock::now() - start > std::chrono::seconds(5)) {
                 m_header->lock = 1;

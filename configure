@@ -352,7 +352,7 @@ CXXFLAGS="-Wall -Wno-missing-braces -Wno-unknown-pragmas -Wno-unused \
 -I${SRCDIR} -I${SRCDIR}/MediaSDK/include -I${SRCDIR}/QSVPipeline -I${SRCDIR}/QSVPlugins \
 -I${SRCDIR}/tinyxml2 -I${SRCDIR}/ttmath \
 "
-LDFLAGS="-L. -ldl -lm -lstdc++ -lstdc++fs"
+LDFLAGS="-L. -ldl -lm -lstdc++ -lstdc++fs -latomic"
 
 if cxx_check "pthread" "${CXXFLAGS} -pthread ${LDFLAGS} -lpthread" ; then
     CXXFLAGS="$CXXFLAGS -pthread"
