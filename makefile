@@ -49,19 +49,19 @@ $(PROGRAM): $(DEPS) $(DEPCS) $(OBJS) $(OBJCS) $(OBJPYWS) $(OBJRBINS) $(OBJRHS) $
 	@$(CC) ./$< $(CFLAGS) -g0 -MT $(basename $<).c.o -MM > $@
 
 %.o: %.pyw
-	objcopy -I binary -O elf64-x86-64 -B i386 $< $@
+	$(OBJCOPY) -I binary -O elf64-x86-64 -B i386 $< $@
 
 %.o: %.bin
-	objcopy -I binary -O elf64-x86-64 -B i386 $< $@
+	$(OBJCOPY) -I binary -O elf64-x86-64 -B i386 $< $@
 
 %.h.o: %.h
-	objcopy -I binary -O elf64-x86-64 -B i386 $< $@
+	$(OBJCOPY) -I binary -O elf64-x86-64 -B i386 $< $@
 
 %.o: %.cl
-	objcopy -I binary -O elf64-x86-64 -B i386 $< $@
+	$(OBJCOPY) -I binary -O elf64-x86-64 -B i386 $< $@
 
 %.o: %.clh
-	objcopy -I binary -O elf64-x86-64 -B i386 $< $@
+	$(OBJCOPY) -I binary -O elf64-x86-64 -B i386 $< $@
 
 -include $(DEPS)
 -include $(DEPCS)

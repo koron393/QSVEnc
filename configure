@@ -148,6 +148,7 @@ ENABLE_DEBUG=0
 CC=${CC:-gcc}
 CXX=${CXX:-g++}
 LD=${LD:-g++}
+OBJCOPY=${OBJCOPY:-objcopy}
 PROGRAM=qsvencc
 PREFIX=${PREFIX:-/usr/local}
 EXTRACXXFLAGS=""
@@ -267,6 +268,9 @@ for opt; do
             CXX="$optarg"
             LD="$optarg"
             ;;
+        --objcopy=*)
+            OBJCOPY="$optarg"
+            ;;
         --extra-cxxflags=*)
             EXTRACXXFLAGS="$optarg"
             ;;
@@ -312,6 +316,7 @@ echo "USE_PKGCONFIG=${USE_PKGCONFIG}" >> ${CNF_LOG}
 echo "ENABLE_DEBUG=${ENABLE_DEBUG}" >> ${CNF_LOG}
 echo "CC=${CC}" >> ${CNF_LOG}
 echo "CXX=${CXX}" >> ${CNF_LOG}
+echo "OBJCOPY=${OBJCOPY}" >> ${CNF_LOG}
 echo "PROGRAM=${PROGRAM}" >> ${CNF_LOG}
 echo "PREFIX=${PREFIX}" >> ${CNF_LOG}
 echo "EXTRACXXFLAGS=${EXTRACXXFLAGS}" >> ${CNF_LOG}
@@ -1025,6 +1030,7 @@ write_config_mak "SRCDIR = $SRCDIR"
 write_config_mak "CC  = $CC"
 write_config_mak "CXX = $CXX"
 write_config_mak "LD  = $LD"
+write_config_mak "OBJCOPY = $OBJCOPY"
 write_config_mak "PROGRAM = $PROGRAM"
 write_config_mak "ENABLE_DEBUG = $ENABLE_DEBUG"
 write_config_mak "CFLAGS = $CFLAGS"
