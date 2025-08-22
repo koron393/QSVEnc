@@ -230,7 +230,7 @@ function showTable(idno) {
     if (type == FEATURE_LIST_STR_TYPE_UNKNOWN) {
         if (check_ext(filename.c_str(), { ".html", ".htm" })) {
             type = FEATURE_LIST_STR_TYPE_HTML;
-        } else if (check_ext(filename.c_str(), { ".csv" })) {
+        } else if (check_ext(filename.c_str(), ".csv")) {
             type = FEATURE_LIST_STR_TYPE_CSV;
         } else {
             type = FEATURE_LIST_STR_TYPE_TXT;

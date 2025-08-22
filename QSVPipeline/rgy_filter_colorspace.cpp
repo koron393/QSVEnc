@@ -658,7 +658,7 @@ void ColorspaceOpLUT3D::clearTable() {
 }
 
 RGY_ERR ColorspaceOpLUT3D::parseTable(std::vector<uint8_t>& additionalParams) {
-    if (check_ext(m_table_file.c_str(), { ".cube" })) {
+    if (check_ext(m_table_file.c_str(), ".cube")) {
         return parseCube(additionalParams);
     }
     m_log->write(RGY_LOG_ERROR, RGY_LOGT_VPP, _T("Unsupported lut3d file type: %s\n"), m_table_file.c_str());
