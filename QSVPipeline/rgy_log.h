@@ -32,14 +32,15 @@
 #include <cstdint>
 #include <string>
 #include <memory>
+#include <mutex>
 #include <array>
 #include "rgy_tchar.h"
 
 //NVEnc.auo/QSVEnc.auoビルド時、/clrでは<thread>は使用できませんなどと出るので、
 //前方宣言で回避する
-namespace std {
-    class mutex;
-}
+//namespace std {
+//    class mutex;
+//}
 
 enum RGYLogLevel {
     RGY_LOG_TRACE = -3,
