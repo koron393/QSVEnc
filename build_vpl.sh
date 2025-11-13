@@ -17,6 +17,8 @@ cmake \
     -DBUILD_PYTHON_BINDING=OFF \
     -DCMAKE_C_FLAGS_RELEASE="$@" \
     -DCMAKE_CXX_FLAGS_RELEASE="$@" \
+    -DCMAKE_C_COMPILER="${CMAKE_C_COMPILER}" \
+    -DCMAKE_CXX_COMPILER="${CMAKE_CXX_COMPILER}" \
     ../libvpl
 
 cmake --build . --config Release
